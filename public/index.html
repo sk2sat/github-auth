@@ -39,27 +39,29 @@
     </div>
     <p id="load">Firebase SDK Loading&hellip;</p>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
-        try {
-          let app = firebase.app();
-          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
-          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyC1-zlPcFeQIJc_0kK6JHcS0W2j71rTAQI",
+    authDomain: "github-login-test-efb6e.firebaseapp.com",
+    databaseURL: "https://github-login-test-efb6e.firebaseio.com",
+    projectId: "github-login-test-efb6e",
+    storageBucket: "github-login-test-efb6e.appspot.com",
+    messagingSenderId: "356305635044"
+  };
+  firebase.initializeApp(config);
+</script>
+
+    <script>
+const provider = new firebase.auth.GithubAuthProvider();
+firebase.auth().signInWithPopup(provider).then((result) => {
+    console.log(`sign in successfully. ${result.user.displayName}`)
+}).catch((error) => {
+    console.log(`fail to sign in. ${error.message}`)
+});
+
     </script>
   </body>
 </html>
